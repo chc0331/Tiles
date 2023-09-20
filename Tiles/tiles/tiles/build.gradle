@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'androidx.wear.tiles'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 26
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        aidl = true
+    }
+}
+
+dependencies {
+    api("androidx.annotation:annotation:1.2.0")
+    implementation(project(path:":protolayout:protolayout"))
+    implementation(project(path:":protolayout:protolayout-expression"))
+    api("com.google.guava:listenablefuture:1.0")
+
+    implementation("androidx.annotation:annotation-experimental:1.3.1")
+    implementation("androidx.concurrent:concurrent-futures:1.1.0")
+    implementation(project(path: ":tiles:tiles-proto"))
+}

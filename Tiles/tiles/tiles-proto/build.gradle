@@ -1,0 +1,63 @@
+plugins {
+    id 'java-library'
+    id 'com.google.protobuf'
+    id 'com.github.johnrengelman.shadow'
+}
+configurations {
+    shadowed
+    compileOnly.extendsFrom(shadowed)
+    testCompile.extendsFrom(shadowed)
+}
+dependencies {
+    constraints {
+        implementation(project(path: ":protolayout:protolayout-proto"))
+    }
+
+    implementation("androidx.annotation:annotation:1.1.0")
+    compileOnly("com.google.protobuf:protobuf-javalite:3.24.3")
+    // Use a non-shadow configuration during compile to pick up the proto dependencies.
+    // But declare the proper shadowed dependency externally.
+    // For some reason not specifying the configuration causes undeclared changes to the inputs to
+    // extractIncludeProto task (making it out-dated without any source change).
+    compileOnly(project(path: ":protolayout:protolayout-proto", configuration:"archives"))
+    api(project(path: ":protolayout:protolayout-proto", configuration:"default"))
+}
+// HACK: Move standard JAR to have another suffix and build a shadowJar with
+// no classifier (so it's picked up as the primary artifact).
+jar {
+    archiveClassifier = 'before-shadow'
+}
+shadowJar {
+    archiveClassifier = ''
+    configurations = [project.configurations.shadowed]
+    relocate "com.google.protobuf", "androidx.wear.protolayout.protobuf"
+    exclude("**/*.proto")
+}
+assemble.dependsOn(shadowJar)
+configurations {
+    apiElements.outgoing.artifacts.clear()
+    apiElements.outgoing.artifact(shadowJar) {
+        builtBy shadowJar
+    }
+    runtimeElements.outgoing.artifacts.clear()
+    runtimeElements.outgoing.artifact(shadowJar) {
+        builtBy shadowJar
+    }
+}
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.24.3"
+    }
+    generateProtoTasks {
+        ofSourceSet("main").each { task ->
+            project.sourceSets.main.java.srcDir(task)
+        }
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}

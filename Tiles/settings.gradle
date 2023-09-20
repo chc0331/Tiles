@@ -1,0 +1,27 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "Tiles"
+include ':app'
+include ':tiles:tiles'
+include ':tiles:tiles-material'
+include ':tiles:tiles-proto'
+include ':protolayout:protolayout'
+include ':protolayout:protolayout-proto'
+include ':protolayout:protolayout-expression'
+//include ':protolayout:protolayout-expression-pipeline'
+//include ':protolayout:protolayout-material'
+//include ':protolayout:protolayout-material-core'
+

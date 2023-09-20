@@ -1,0 +1,58 @@
+plugins {
+    id 'java-library'
+    id 'com.google.protobuf'
+    id 'com.github.johnrengelman.shadow'
+}
+
+configurations {
+    shadowed
+    compileOnly.extendsFrom(shadowed)
+    testCompile.extendsFrom(shadowed)
+    // for downstream tests, provide a configuration that includes the shadow output + other
+    // dependencies that are not shadowed
+    shadowAndImplementation.extendsFrom(shadow)
+    shadowAndImplementation.extendsFrom(implementation)
+}
+
+dependencies {
+    implementation "androidx.annotation:annotation:1.1.0"
+    shadowed "com.google.protobuf:protobuf-javalite:3.24.3"
+}
+jar {
+    archiveClassifier = 'before-shadow'
+}
+shadowJar {
+    archiveClassifier = ''
+    configurations = [project.configurations.shadowed]
+    relocate "com.google.protobuf", "androidx.wear.protolayout.protobuf"
+    exclude("**/*.proto")
+}
+
+configurations {
+    apiElements.outgoing.artifacts.clear()
+    apiElements.outgoing.artifact(shadowJar) {
+        builtBy shadowJar
+    }
+    runtimeElements.outgoing.artifacts.clear()
+    runtimeElements.outgoing.artifact(shadowJar) {
+        builtBy shadowJar
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.24.3"
+    }
+    generateProtoTasks {
+        ofSourceSet("main").each { task ->
+            project.sourceSets.main.java.srcDir(task)
+        }
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}
