@@ -23,8 +23,26 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
+<!--        <service-->
+<!--            android:name=".presentation.hello.HelloWorldTileService"-->
+<!--            android:description="@string/hello_tile_description"-->
+<!--            android:exported="true"-->
+<!--            android:icon="@drawable/common_full_open_on_phone"-->
+<!--            android:label="@string/hello_tile_label"-->
+<!--            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">-->
+
+<!--            <intent-filter>-->
+<!--                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />-->
+<!--            </intent-filter>-->
+
+<!--            &lt;!&ndash; The tile preview shown when configuring tiles on your phone &ndash;&gt;-->
+<!--            <meta-data-->
+<!--                android:name="androidx.wear.tiles.PREVIEW"-->
+<!--                android:resource="@drawable/tile_hello" />-->
+<!--        </service>-->
+
         <service
-            android:name=".presentation.hello.HelloWorldTileService"
+            android:name=".presentation.hello.ArcLineTileService"
             android:description="@string/hello_tile_description"
             android:exported="true"
             android:icon="@drawable/common_full_open_on_phone"
