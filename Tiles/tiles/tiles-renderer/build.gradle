@@ -32,6 +32,7 @@ android {
 dependencies {
     api("androidx.annotation:annotation:1.1.0")
     api("com.google.guava:listenablefuture:1.0")
+    api("com.google.guava:guava:31.1-jre")
 
     implementation "androidx.concurrent:concurrent-futures:1.1.0"
     implementation "androidx.concurrent:concurrent-futures-ktx:1.1.0"
@@ -39,6 +40,7 @@ dependencies {
     implementation "androidx.wear:wear:1.2.0"
 
     api(project(":protolayout:protolayout"))
+    implementation(project(":protolayout:protolayout-expression"))
     implementation(project(":protolayout:protolayout-expression-pipeline"))
     implementation(project(":protolayout:protolayout-renderer"))
     implementation(project(":tiles:tiles"))

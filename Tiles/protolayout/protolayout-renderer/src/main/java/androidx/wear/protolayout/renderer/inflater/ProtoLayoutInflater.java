@@ -385,6 +385,7 @@ public final class ProtoLayoutInflater {
             this(view, layoutParams, NO_OP_PENDING_LAYOUT_PARAMS, /* numMissingChildren= */ 0);
         }
 
+        @SuppressLint("RestrictedApi")
         boolean addMissingChildrenFrom(View source) {
             if (mNumMissingChildren == 0) {
                 // Nothing to do.
@@ -732,6 +733,7 @@ public final class ProtoLayoutInflater {
             }
 
             /** Builds a Config instance. */
+            @SuppressLint("RestrictedApi")
             @NonNull
             public Config build() {
                 if (mLoadActionListener != null && mLoadActionExecutor == null) {

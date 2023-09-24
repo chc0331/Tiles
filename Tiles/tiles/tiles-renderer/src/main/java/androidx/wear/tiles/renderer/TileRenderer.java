@@ -18,6 +18,7 @@ package androidx.wear.tiles.renderer;
 
 import static androidx.core.util.Preconditions.checkNotNull;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -209,6 +210,7 @@ public final class TileRenderer {
      *     ResourceBuilders.Resources, ViewGroup)} instead. Note: This method only works with the
      *     deprecated constructors that accept Layout and Resources.
      */
+    @SuppressLint("RestrictedApi")
     @Deprecated
     @Nullable
     public View inflate(@NonNull ViewGroup parent) {
