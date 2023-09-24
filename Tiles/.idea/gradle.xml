@@ -7,7 +7,7 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../../../DEV/gradle-6.8.3-all/gradle-6.8.3" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../gradle-6.8.3-all/gradle-6.8.3" />
         <option name="gradleJvm" value="jbr-17" />
         <option name="modules">
           <set>
@@ -16,11 +16,14 @@
             <option value="$PROJECT_DIR$/protolayout" />
             <option value="$PROJECT_DIR$/protolayout/protolayout" />
             <option value="$PROJECT_DIR$/protolayout/protolayout-expression" />
+            <option value="$PROJECT_DIR$/protolayout/protolayout-expression-pipeline" />
             <option value="$PROJECT_DIR$/protolayout/protolayout-proto" />
+            <option value="$PROJECT_DIR$/protolayout/protolayout-renderer" />
             <option value="$PROJECT_DIR$/tiles" />
             <option value="$PROJECT_DIR$/tiles/tiles" />
             <option value="$PROJECT_DIR$/tiles/tiles-material" />
             <option value="$PROJECT_DIR$/tiles/tiles-proto" />
+            <option value="$PROJECT_DIR$/tiles/tiles-renderer" />
           </set>
         </option>
       </GradleProjectSettings>

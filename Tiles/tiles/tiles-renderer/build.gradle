@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'androidx.wear.protolayout.expression.pipeline'
+    namespace 'androidx.wear.tiles_renderer'
     compileSdk 33
 
     defaultConfig {
@@ -30,14 +30,23 @@ android {
 }
 
 dependencies {
-    api("androidx.annotation:annotation:1.2.0")
-    implementation("androidx.collection:collection:1.2.0")
-    implementation("androidx.core:core:1.7.0")
-    implementation("androidx.concurrent:concurrent-futures:1.1.0")
+    api("androidx.annotation:annotation:1.1.0")
+    api("com.google.guava:listenablefuture:1.0")
 
-    implementation("androidx.annotation:annotation-experimental:1.3.1")
-    implementation(project(path: ":protolayout:protolayout-proto", configuration: "shadow"))
-    implementation(project(path: ":protolayout:protolayout-expression"))
+    implementation "androidx.concurrent:concurrent-futures:1.1.0"
+    implementation "androidx.concurrent:concurrent-futures-ktx:1.1.0"
+    implementation("androidx.core:core:1.7.0")
+    implementation "androidx.wear:wear:1.2.0"
+
+    api(project(":protolayout:protolayout"))
+    implementation(project(":protolayout:protolayout-expression-pipeline"))
+    implementation(project(":protolayout:protolayout-renderer"))
+    implementation(project(":tiles:tiles"))
+    implementation(project(":tiles:tiles-proto"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
